@@ -39,8 +39,6 @@
   
   // добавляет посты внутри jQuery-коллекции $from
   function appendPosts($from){
-    // получаем объект с постами из localStorage
-    var posts = unpack(ls.posts || '');
   
     // выбираем все ссылки на пост в $from
     $from.find('a.entry-title').each(function(_,x){
@@ -48,15 +46,10 @@
       if(link) posts[link[0]] = true;
       else console.error('Invalid entry-title', x);
     });
-    
-    // обратно загоняем посты в localStorage
-    ls.posts = pack(posts);
   }
 
     // удаляем же
    function removePosts($from){
-    // получаем объект с постами из localStorage
-    var posts = unpack(ls.posts || '');
   
     // выбираем все ссылки на пост в $from
     $from.find('a.entry-title').each(function(_,x){
@@ -64,13 +57,13 @@
       if(link) delete posts[link[0]]; // удаляем из хранилища
       else console.error('Invalid entry-title', x);
     });
-    
-    // обратно загоняем посты в localStorage
-    ls.posts = pack(posts);
   }
-
+  
     
   var ls = window.localStorage || {};
+  
+  // получаем объект с постами из localStorage
+    var posts = unpack(ls.posts || '');
   
   switch(window.location.pathname){
   case '/comments':
@@ -105,5 +98,6 @@
     removePosts($('li.hentry'));
     break;
   }
-  
+     // обратно загоняем посты в localStorage
+    ls.posts = pack(posts);
 })();
