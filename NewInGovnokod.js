@@ -20,18 +20,8 @@
       .sort(function(x, y){ return x < y ? -1 : x > y ? 1 : 0; }); // отсортируем по возрастанию
       
     if(!posts.length) return '';
-    
-    // res - почти как StringBuilder для результата
-    // sequence - флаг "начали последовательность" (A..B)
-    var res = [String(posts[0])];
-    // диапазоны нинужны
-    for(var i=1; i<posts.length; ++i){
-      
-        res.push(',', String(posts[i]));
-      
-    }
 
-    return res.join(''); // соберём строку (StringBuilder.toString());
+    return [String(posts[0])].join(',');
   }
   
   // обратная функция к pack :)
