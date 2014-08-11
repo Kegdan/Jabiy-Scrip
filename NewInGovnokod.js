@@ -21,7 +21,7 @@
       
     if(!posts.length) return '';
 
-    return [String(posts[0])].join(',');
+    return posts.join(',');
   }
   
   // обратная функция к pack :)
