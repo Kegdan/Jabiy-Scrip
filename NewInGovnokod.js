@@ -69,6 +69,8 @@
   case '/comments':
    appendPosts($('.published').filter(function() {return new Date($(this).attr('title')) >= new Date(ls.time);}).parents('li.hentry'));
     ls.time = new Date().toString();
+    var login = $('#expand-trigger').text().match(/Привет, ([^!]+)!/)[1];
+     removePosts( $('.entry-author').find('a:contains('+login+')').parents('li.hentry'))     ;
     break;
   case '/':
     // удаляем все, что видим - потом добавляем все, у которых есть новые комменты (в js нуб может можно лучше сделать)
