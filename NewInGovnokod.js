@@ -79,27 +79,25 @@
     
     break;
     
-  case '/user/login':
-    // кабинка - если есть список постов, отображаем
     
-    if(!ls.posts){ 
-      $('li.hentry')
-        .append('<div class="user-changed-posts"><br/>Непрочитанных постов нет</div>"');
-      break;
-    }
-    
-    // добавляем к страницк список постов 
-    $('li.hentry')
-      .append('<div class="user-changed-posts"><br/>Непрочитанные посты: <tt>"' + 
-        String(ls.posts).replace(/\d+/g, '<a href="/$&">$&</a>') + // формируем ссылки, если вдруг захочется кликнуть
-        '"</tt> </div>');
-    break;
+   
     
    default:
     // на странице - значит прочитали - в адъ ее
     removePosts($('li.hentry'));
     break;
-  }
-     // обратно загоняем посты в localStorage
+  } 
     ls.posts = pack(posts);
+    if(!ls.posts){ 
+     $('#header')
+        .append('<div class="user-changed-posts"><br/>Непрочитанных постов нет</div>');
+    }else{
+    
+    // добавляем к страницк список постов 
+    $('#header')
+      .append('<div class="user-changed-posts"><br/>Непрочитанные посты: <tt>"' + 
+        String(ls.posts).replace(/\d+/g, '<a href="/$&">$&</a>') + // формируем ссылки, если вдруг захочется кликнуть
+              '"</tt> </div>');}
+     
+    
 })();
