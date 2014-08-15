@@ -65,28 +65,18 @@
   // получаем объект с постами из localStorage
     var posts = unpack(ls.posts || '');
   
-  switch(window.location.pathname){
-  case '/comments':
+  if(window.location.pathname == '/comments'){
    appendPosts($('.published').filter(function() {return new Date($(this).attr('title')) >= new Date(ls.time);}).parents('li.hentry'));
     ls.time = new Date().toString();
-    var login = $('#expand-trigger').text().match(/Привет, ([^!]+)!/)[1];
+    var login = $('#expand-trigger').text().match(/Привет,\s(.+)!$/)[1];
      removePosts( $('.entry-author').find('a:contains('+login+')').parents('li.hentry'))     ;
-    break;
-  case '/':
-    // удаляем все, что видим - потом добавляем все, у которых есть новые комменты (в js нуб может можно лучше сделать)
-    removePosts($('li.hentry'))
-    appendPosts($('.entry-comments-new').parents('li.hentry'));
-    
-    break;
-    
-    
-   
-    
-   default:
-    // на странице - значит прочитали - в адъ ее
-    removePosts($('li.hentry'));
-    break;
-  } 
+  }else
+          if (window.location.pathname.match(/\/\d+/)) {
+              removePosts($('li.hentry'));}
+          else{
+               appendPosts($('.entry-comments-new').parents('li.hentry'));
+          }
+  
     ls.posts = pack(posts);
     if(!ls.posts){ 
      $('#header')
