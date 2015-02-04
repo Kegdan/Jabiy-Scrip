@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BigIconInCommentsInGovnokod
 // @namespace    -
-// @version      1.0
+// @version      1.1
 // @description  Use it, anonimus
 // @author       Kegdan
 // @include http://govnokod.ru/*
@@ -18,14 +18,13 @@ var bigIconInComments = function(){
     
     $(".entry-comment-wrapper").each(
 		function() { 
-			var text = $(this).find(".comment-text");
+			var text = $(this).find(".entry-comment").css("margin", "10px 0px 0px 10px");
             var answer = $(this).find(".answer").css("margin", "0px 0px 0px 0px");
             text.append("<p></p>").append(answer);
 		}
 	).css("overflow", "auto");
     
     $(".entry-info").css("margin", "10px");
-    $(".entry-comment").css("margin", "10px 0px 0px 10px");
     $(".entry-author").css("margin", "0px");
 }
 
