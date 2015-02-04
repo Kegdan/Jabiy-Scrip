@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BigIconInCommentsInGovnokod
 // @namespace    -
-// @version      1.1
+// @version      1.2
 // @description  Use it, anonimus
 // @author       Kegdan
 // @include http://govnokod.ru/*
@@ -12,7 +12,7 @@ var bigIconInComments = function(){
 	$(".entry-comments").find(".avatar").each(
 		function() { 
 			var newVal = $(this).attr("src").replace(/([^?])\?.*$/, "$1").replace("28.png","100.png");
-			$(this).attr("src", newVal).css("float", "left").css("margin", "0px 10px 0px 0px");
+			$(this).attr("src", newVal).css("float", "left").css("margin", "0px 10px 0px 0px").height(80).width(80);
 		}
 	).removeClass("avatar");
     
@@ -24,7 +24,6 @@ var bigIconInComments = function(){
 		}
 	).css("overflow", "auto");
     
-    $(".entry-info").css("margin", "10px");
     $(".entry-author").css("margin", "0px");
 }
 
