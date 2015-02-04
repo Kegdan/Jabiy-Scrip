@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         BigIconInCommentsInGovnokod
-// @namespace    http://your.homepage/
-// @version      0.1
-// @description  enter something useful
-// @author       You
+// @namespace    -
+// @version      1.0
+// @description  Use it, anonimus
+// @author       Kegdan
 // @include http://govnokod.ru/*
 // @include http://www.govnokod.ru/*
 // @grant        none
@@ -11,17 +11,15 @@
 var bigIconInComments = function(){
 	$(".entry-comments").find(".avatar").each(
 		function() { 
-			var newVal = $(this).attr("src").replace(/([^?])\?.*$/, "$1");
-      	    newVal = newVal.replace("28.png","100.png");
-			$(this).attr("src", newVal);
-            $(this).css("float", "left").css("margin", "0px 10px 0px 0px")
+			var newVal = $(this).attr("src").replace(/([^?])\?.*$/, "$1").replace("28.png","100.png");
+			$(this).attr("src", newVal).css("float", "left").css("margin", "0px 10px 0px 0px");
 		}
 	).removeClass("avatar");
     
     $(".entry-comment-wrapper").each(
 		function() { 
 			var text = $(this).find(".comment-text");
-            var answer = $(this).find(".answer").css("margin", "0px 0px 0px 0px");;
+            var answer = $(this).find(".answer").css("margin", "0px 0px 0px 0px");
             text.append("<p></p>").append(answer);
 		}
 	).css("overflow", "auto");
