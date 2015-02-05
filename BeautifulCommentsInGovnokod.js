@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Beautiful Comments
 // @namespace    -
-// @version      2.1
+// @version      2.2
 // @description  Use it, anonimus!
 // @author       Kegdan
 // @include http://govnokod.ru/*
@@ -24,6 +24,10 @@ var BeautifulComments = function(){
     $(".entry-comments").children("ul").children(".hcomment").css("border-right-width","1px")
 	$("div").css("background-color",$("div").css("background-color"));
     $(".published").css("color","#000000");
+    
+    $(".new").parent().css({"border-style":"solid", "border-width": "3px 0px 3px 3px", "border-color":"green"});
+    $(".highlight").parent().css({"border-style":"solid", "border-width": "3px 0px 3px 3px", "border-color":"red"});
+
 };
 
 $(document).ajaxComplete(BeautifulComments);
