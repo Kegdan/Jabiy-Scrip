@@ -25,10 +25,6 @@ var BeautifulComments = function(){
 
     $(".hcomment").css({"border-width":"1px 0px 1px 1px",
                         "border-style":"solid","border-color":"#000000"});
-    /*.each(function (){
-        $(this).css("background-color",colors[i]);
-        if(i == colors.length-1) i=0; else i++;
-    });*/
     colorFunc($(".entry-comments"),-1);
 
     $(".entry-comments").children("ul").children(".hcomment").css("border-right-width","1px");
