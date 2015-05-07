@@ -8,31 +8,44 @@
 // @grant none
 // ==/UserScript==
 
-var current = 0;
+var current = -1;
 var newCommentsLinks = [];
 
 function next() {
-    location.href = newCommentsLinks[current];
-    current = (current === newCommentsLinks.length -1)?0:current+1;
-    
+    current = (current === newCommentsLinks.length -1)? 0:current +1;
+    goTo(newCommentsLinks[current]);
 }
 
 function previous() {
-    location.href = newCommentsLinks[current];
-    current = (current === 0)?newCommentsLinks.length -1:current-1;
-    
+    current = (current <= 0)? newCommentsLinks.length -1:current -1;
+    goTo(newCommentsLinks[current]);
+}
+function toParent() {
+    goTo($(newCommentsLinks[current]).parents('.hcomment')[0]);
+}
+
+function toCurrent() {
+    goTo(newCommentsLinks[current]);
+}
+
+function goTo(comment) {
+    location.href = $(comment).find(".entry-info").children('a')[0].href;
 }
 
 if(window.location.pathname.match(/^\/\d+/)){
     
-    newCommentsLinks = $(".new").add(".highlight").map(function(){return $(this).find(".entry-info").children('a')[0].href;});
+    newCommentsLinks = $(".new").add(".highlight").parent('.hcomment');
     
     if( newCommentsLinks.length>0 ) 
     {
         $(document).keydown(
+            
             function(e) {
-                if(e.keyCode === 39) next();
-                if(e.keyCode === 37) previous();
+                if(e.target.type === 'textarea') return;
+                if(e.keyCode === 68) next();
+                if(e.keyCode === 65) previous();
+                if(e.keyCode === 87) toParent();
+                if(e.keyCode === 83) toCurrent();
             });
     }
 
